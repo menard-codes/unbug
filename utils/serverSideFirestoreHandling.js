@@ -49,6 +49,7 @@ async function onRequestAuthorization(ctx) {
         const requester = await adminAuth.verifyIdToken(token);
         return {requesterId: requester.uid}
     } catch (error) {
+        console.log(error)
         return {redirect: {destination: '/login', permanent: false}}
     }
 }

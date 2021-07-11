@@ -3,11 +3,12 @@ import { adminFirestore } from '../../app/firebaseAdmin';
 // TODO: Parse the user id
 export default async function addProject(req, res) {
   if (req.method === 'POST') {
-    const payload = req.body;
+    const {bugData} = req.body;
   
     try {    
-      const docRef = await adminFirestore.collection('Project').add(payload)
+      const docRef = await adminFirestore.collection('Bugs').add(bugData)
       res.json({id: docRef.id})
+      res.end()
     } catch (error) {
       res.json({error: error.message})
       res.end()

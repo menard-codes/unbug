@@ -12,16 +12,15 @@ statically generated site.
 */
 
 export default function NewProject() {
-    /*
-    requires sign in
-    just asks title
-    */
     const [user, loading, error] = useAuthState(auth);
     const router = useRouter();
     
     if (loading) return <Loading />
     else if (error) return <Error msg={error} />
-    else if (user) return <NewProjectForm />
+    else if (user) {
+        const uid = user.uid;
+        return <NewProjectForm ownerId={uid} />
+    }
     
     router.push('/login')
     return <h1>Redirecting...</h1>

@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
         nookies.destroy(null, 'token', {})
       }
     })
-    return unsub
+    return () => unsub
   }, [])
 
   return <Component {...pageProps} />
