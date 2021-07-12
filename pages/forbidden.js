@@ -1,10 +1,14 @@
 import React from 'react'
+import Navbar from '../components/widgets/Navbar'
 
 function Forbidden() {
     return (
-        <div>
-            <h1>403 Forbidden: You&apos;re not allowed here</h1>
-        </div>
+        <>
+            <Navbar />
+            <div>
+                <h1>403 Forbidden: You&apos;re not allowed here</h1>
+            </div>
+        </>
     )
 }
 

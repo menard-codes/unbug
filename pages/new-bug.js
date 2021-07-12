@@ -8,29 +8,47 @@ import { useRouter } from 'next/router'
 import Loading from '../components/elements/Loading'
 import Error from '../components/elements/Error'
 
+import Navbar from '../components/widgets/Navbar'
+import { getCollectionSnapshot } from '../utils/serverSideFirestoreHandling'
+
+
 /*
 statically generated site.
     -client checks auth status
 */
 
-function NewBug() {
+export default function NewBug({ projects }) {
     const [user, loading, error] = useAuthState(auth)
     const router = useRouter()
+    projects && console.log(projects)
 
-    if (loading) return <Loading />
-    else if (error) return <Error msg={error.message} />
-
-    else if (user) {
-        const uid = user.uid
+    if (user || loading || error) {
         return (
-            <div>
-                <NewBugForm ownerId={uid} />
-            </div>
-        )    
-    }
-
+            <>
+                <Navbar />
+                {loading && <Loading />}
+                {error && <Error msg={error.message} />}
+                {user && <NewBugForm ownerId={user.uid} projects={projects} />}
+            </>
+          )
+      }
+    
     router.push('/login')
-    return <h1>Redirecting...</h1>
+    return <h1>Redirecting...</h1>    
 }
 
-export default NewBug
+export async function getServerSideProps(ctx) {
+    // TODO: Query database for all the projects this user owns
+    // I need to refer to a collection
+    const {redirect, collectionSnapshot} = await getCollectionSnapshot(ctx, 'Project')
+
+    if (redirect) return {redirect}
+    else if (collectionSnapshot) {
+        // get all documents and access the title
+        const projects = collectionSnapshot.docs.map(projSnapshot => {
+            const data = projSnapshot.data();
+            return {title: data.title, id: projSnapshot.id}
+        })
+        return {props: {projects}}
+    }
+}

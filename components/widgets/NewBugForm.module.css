@@ -1,0 +1,65 @@
+
+.container {
+    margin-left: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50vw;
+    font-size: 1.5rem;
+    margin-top: 50px;
+}
+
+.input {
+    padding: 10px;
+    font-size: 1.5rem;
+    border: 3px solid rgb(148, 146, 146);
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+}
+
+.input:focus {
+    border: 3px solid black;
+}
+
+.input:hover {
+    border: 3px solid black;
+    transition: 0.1s ease-in;
+}
+
+.file {
+    background-color: rgb(158, 158, 158);
+    border-radius: 30px;
+    margin: 20px 0;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.file:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+.fileInput {
+    visibility: hidden;
+}
+
+.btn {
+    background-color: rgb(10, 10, 10);
+    color: white;
+    font-size: 2rem;
+    padding: 15px 0;
+    border-radius: 20px;
+    margin: 5px 0 100px 0;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+}
+
+.btn:hover {
+    background-color: rgb(30, 30, 30);
+}

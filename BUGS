@@ -1,2 +1,22 @@
 BUGS:
-    1. The session keeps on expiring
+    1. The session keeps on expiring (check if this still persists)
+
+Todo:
+    loading:
+        -projects page > (clicks on a project) > {should have loading} > project page
+        -navbar > (clicks on link) > (loading) > go to page
+    newBug > onPost:
+        -post bug button should be disabled on click and text should be ellipsis
+    -project page
+    -navbar
+        -design
+        -show active page (if there are)
+        -add user photo/avatar
+        -add signout button
+
+Defered:
+    new-bug:
+        -ability to see and remove the files added on attachments
+    -main page
+        -add dashboard
+        -add quick list and stats of bugs and projects

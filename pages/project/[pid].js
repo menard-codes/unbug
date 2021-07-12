@@ -1,6 +1,13 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { getCollectionSnapshot, getDocData } from '../../utils/serverSideFirestoreHandling';
+import { getCollectionSnapshot, getDocData } from '../../utils/serverSideFirestoreHandling'
+import Navbar from '../../components/widgets/Navbar'
+
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../../app/firebaseApp'
+
+import Loading from '../../components/elements/Loading'
+import Error from '../../components/elements/Error'
 
 /*
 server side generated:
@@ -12,15 +19,23 @@ server side generated:
 // TODO: Render the data
 // TODO: Auth
 export default function Project(props) {
+    const [user, loading, error] = useAuthState(auth)
     const router = useRouter();
     console.log(props)
 
-    return (
-        <div>
-            <h1>Project Page</h1>
-            <p>{router.query.pid}</p>
-        </div>
-    )
+    if (user || loading || error) {
+        return (
+            <>
+                <Navbar />
+                {loading && <Loading />}
+                {error && <Error msg={error.message} />}
+                {user && <h1>Project Page</h1>}
+            </>
+        )
+    }
+
+    router.push('/login')
+    return <h1>Redirecting...</h1>
 }
 
 export async function getServerSideProps(ctx) {

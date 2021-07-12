@@ -7,7 +7,9 @@ import { getDocData } from '../../utils/serverSideFirestoreHandling'
 
 import Loading from '../../components/elements/Loading'
 import Error from '../../components/elements/Error'
+import Navbar from '../../components/widgets/Navbar'
 
+import { useRouter } from 'next/router'
 
 /*
 server side generated:
@@ -17,16 +19,21 @@ server side generated:
 export default function Bug({ data }) {
     const [user, loading, error] = useAuthState(auth);
     user && console.log(data)
+    const router = useRouter()
 
-    if (loading) return <Loading />
-    else if (error) return <Error msg={error.message} />
-    else if (user) {
+    if (user || loading || error) {
         return (
-            <div>
-                <h1>Bug Page</h1>
-            </div>
-        )    
+            <>
+                <Navbar />
+                {loading && <Loading />}
+                {error && <Error msg={error.message} />}
+                {user && <h1>Bug Page</h1>}
+            </>
+        )
     }
+
+    router.push('/login')
+    return <h1>Redirecting...</h1>
 }
 
 export async function getServerSideProps(ctx) {

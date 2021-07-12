@@ -1,0 +1,26 @@
+
+.listItem {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 30px;
+    margin: 20px 0;
+    width: 60vw;
+    border-radius: 10px;
+    text-decoration: underline rgb(182, 182, 182) 3px;
+    font-size: 1.5rem;
+    background-color: rgb(61, 61, 61);
+    color: white;
+    transition: 0.2s ease-in;
+    cursor: pointer;
+}
+
+.listItem:hover {
+    background-color: rgb(116, 116, 116);
+    transition: 0.2s ease-in;
+}
+
+@media (max-width: 500px) {
+    .listItem:hover {
+        background-color: rgb(116, 116, 116);
+        transition: 0.2s ease-in;
+    }    
+}
