@@ -9,7 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../app/firebaseApp'
 
 import ProjectListItem from '../components/elements/ProjectListItem'
-
+import layout from '../styles/layout.module.css'
 
 /*
 server side generated:
@@ -18,29 +18,29 @@ server side generated:
 */
 export default function Projects({ projectsData }) {
     const [user, loading, error] = useAuthState(auth)
-    const [onProjectLoad, setOnProjectLoad] = useState(false)
-    projectsData && console.log(projectsData)
 
     if (user || loading || error) {
         return (
             <>
                 <Navbar />
-                {loading && <Loading />}
-                {error && <Error msg={error.message} />}
-                {user && (
-                  <>
-                    <h1>Projects List</h1>
-                    <ul>
-                        {
-                            projectsData.map(project => (
-                                <li key={project.projectId} style={{listStyle: 'none'}}>
-                                    <ProjectListItem projectTitle={project.projectTitle} id={project.projectId} />
-                                </li>
-                            ))
-                        }
-                    </ul>
-                  </>
-                )}
+                <div className={layout.layout}>
+                    {loading && <Loading />}
+                    {error && <Error msg={error.message} />}
+                    {user && (
+                    <>
+                        <h1>Projects List</h1>
+                        <ul>
+                            {
+                                projectsData.map(project => (
+                                    <li key={project.projectId} style={{listStyle: 'none'}}>
+                                        <ProjectListItem projectTitle={project.projectTitle} id={project.projectId} />
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </>
+                    )}
+                </div>
             </>
           )
       }

@@ -9,6 +9,11 @@ import { auth } from '../../app/firebaseApp'
 import Loading from '../../components/elements/Loading'
 import Error from '../../components/elements/Error'
 
+import BugsCount from '../../components/elements/BugsCount'
+import SimpleTabs from '../../components/elements/TabsBar'
+
+import layout from '../../styles/layout.module.css'
+
 /*
 server side generated:
     -client checks login status
@@ -18,18 +23,36 @@ server side generated:
 
 // TODO: Render the data
 // TODO: Auth
-export default function Project(props) {
+export default function Project({ projectTitle, backlogs, counts, lists }) {
     const [user, loading, error] = useAuthState(auth)
-    const router = useRouter();
-    console.log(props)
+    const router = useRouter()
+    console.log(backlogs, lists)
 
     if (user || loading || error) {
         return (
             <>
                 <Navbar />
-                {loading && <Loading />}
-                {error && <Error msg={error.message} />}
-                {user && <h1>Project Page</h1>}
+                <div className={layout.layout}>
+                    {loading && <Loading />}
+                    {error && <Error msg={error.message} />}
+                    {user && (
+                        <>
+                            <h1>{projectTitle}</h1>
+                            <div>
+                                <BugsCount counts={counts} />
+                                <SimpleTabs
+                                    tabs={['Pending Bugs', 'For Retest', 'Verified Bugs', 'Defered Bugs', 'Duplicate Bugs', 'Rejected Bugs']}
+                                    pending={backlogs.BugBacklog}
+                                    retest={backlogs.RetestBacklog}
+                                    verified={lists.VerifiedList}
+                                    defered={lists.DeferedList}
+                                    duplicate={lists.DuplicateList}
+                                    rejected={lists.RejectedList}
+                                />
+                            </div>
+                        </>
+                    )}
+                </div>
             </>
         )
     }
@@ -61,6 +84,7 @@ export async function getServerSideProps(ctx) {
                                 .map(bugSnapshot => {
                                     const data = bugSnapshot.data()
                                     data['time added'] = Date(data['time added'])
+                                    data['id'] = bugSnapshot.id
                                     return data
                                 })
             const RetestBacklog = collectionSnapshot
@@ -69,6 +93,7 @@ export async function getServerSideProps(ctx) {
                                     .map(bugSnapshot => {
                                         const data = bugSnapshot.data()
                                         data['time added'] = Date(data['time added'])
+                                        data['id'] = bugSnapshot.id
                                         return data
                                     })
 
@@ -78,6 +103,7 @@ export async function getServerSideProps(ctx) {
                                     .map(bugSnapshot => {
                                         const data = bugSnapshot.data()
                                         data['time added'] = Date(data['time added'])
+                                        data['id'] = bugSnapshot.id
                                         return data
                                     })
             const RejectedList = collectionSnapshot
@@ -86,6 +112,7 @@ export async function getServerSideProps(ctx) {
                                     .map(bugSnapshot => {
                                         const data = bugSnapshot.data()
                                         data['time added'] = Date(data['time added'])
+                                        data['id'] = bugSnapshot.id
                                         return data
                                     })
             const DuplicateList = collectionSnapshot
@@ -94,6 +121,7 @@ export async function getServerSideProps(ctx) {
                                     .map(bugSnapshot => {
                                         const data = bugSnapshot.data()
                                         data['time added'] = Date(data['time added'])
+                                        data['id'] = bugSnapshot.id
                                         return data
                                     })
             const VerifiedList = collectionSnapshot
@@ -102,6 +130,7 @@ export async function getServerSideProps(ctx) {
                                     .map(bugSnapshot => {
                                         const data = bugSnapshot.data()
                                         data['time added'] = Date(data['time added'])
+                                        data['id'] = bugSnapshot.id
                                         return data
                                     })
             

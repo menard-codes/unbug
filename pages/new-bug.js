@@ -10,7 +10,7 @@ import Error from '../components/elements/Error'
 
 import Navbar from '../components/widgets/Navbar'
 import { getCollectionSnapshot } from '../utils/serverSideFirestoreHandling'
-
+import layout from '../styles/layout.module.css'
 
 /*
 statically generated site.
@@ -26,9 +26,11 @@ export default function NewBug({ projects }) {
         return (
             <>
                 <Navbar />
-                {loading && <Loading />}
-                {error && <Error msg={error.message} />}
-                {user && <NewBugForm ownerId={user.uid} projects={projects} />}
+                <div className={layout.layout}>
+                    {loading && <Loading />}
+                    {error && <Error msg={error.message} />}
+                    {user && <NewBugForm ownerId={user.uid} projects={projects} />}
+                </div>
             </>
           )
       }

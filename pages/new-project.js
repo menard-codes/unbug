@@ -7,6 +7,8 @@ import Error from '../components/elements/Error';
 import NewProjectForm from '../components/widgets/NewProjectForm';
 import Navbar from '../components/widgets/Navbar';
 
+import layout from '../styles/layout.module.css'
+
 /*
 statically generated site.
     -client checks auth status
@@ -20,13 +22,15 @@ export default function NewProject() {
         return (
             <>
                 <Navbar />
-                {loading && <Loading />}
-                {error && <Error msg={error.message} />}
-                {user && (
-                  <>
-                    <NewProjectForm ownerId={user.uid} />
-                  </>
-                )}
+                <div className={layout.layout}>
+                  {loading && <Loading />}
+                  {error && <Error msg={error.message} />}
+                  {user && (
+                    <>
+                      <NewProjectForm ownerId={user.uid} />
+                    </>
+                  )}
+                </div>
             </>
           )
       }

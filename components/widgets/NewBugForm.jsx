@@ -21,6 +21,7 @@ export default function NewBugForm({ownerId, projects}) {
     const [description, setDescription] = useState('')
     const [expected, setExpected] = useState('')
     const [actual, setActual] = useState('')
+    const [submitEvent, setSubmitEvent] = useState(false)
     const attachments = []
     
     const router = useRouter()
@@ -29,6 +30,7 @@ export default function NewBugForm({ownerId, projects}) {
 
     const handleSubmit = e => {
         e.preventDefault()
+        setSubmitEvent(true)
         // TODO: This doesn't consider the error from api. handle that
         const bugSnapshot = {
             type: 'bug',
@@ -149,8 +151,9 @@ export default function NewBugForm({ownerId, projects}) {
                 </label>
                 <button
                     className={newBugStyle.btn}
+                    disabled={submitEvent}
                 >
-                    Post Bug
+                    {submitEvent ? '...' : 'Post Bug'}
                 </button>
             </form>
         </div>

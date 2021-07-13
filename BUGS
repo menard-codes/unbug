@@ -1,18 +1,26 @@
 BUGS:
     1. The session keeps on expiring (check if this still persists)
+    2. CSS sometimes doesn't load on new project, but loads on page reload. I'm thinking if it's a caching issue
+    3. CSS Also doesn't load sometimes in projects page
+    4. Project Page:
+        -Always redirects to login when refreshing a protected route
+        -Shows all bugs the user owns, but not specified to a specific project. needsbugs of a project
 
 Todo:
-    loading:
-        -projects page > (clicks on a project) > {should have loading} > project page
-        -navbar > (clicks on link) > (loading) > go to page
-    newBug > onPost:
-        -post bug button should be disabled on click and text should be ellipsis
-    -project page
-    -navbar
-        -design
-        -show active page (if there are)
-        -add user photo/avatar
-        -add signout button
+    [X] loading:
+        [X] projects page > (clicks on a project) > {should have loading} > project page
+    [X] newBug > onPost:
+        [X] post bug button should be disabled on click and text should be ellipsis
+    [ ] project page
+    [ ] Bug Page
+    [ ] navbar
+        [X] design
+        [X] show active page (if there are)
+        [ ] add user photo/avatar
+        [ ] add signout button
+    [ ] Overall Design
+        [ ] Responsive Layout
+    [ ] Bugs List
 
 Defered:
     new-bug:

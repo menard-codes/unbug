@@ -34,6 +34,7 @@ function NewProjectForm({ownerId}) {
                 <label>Project Title</label>
                 <input
                     type="text"
+                    required
                     placeholder="Enter project title..."
                     value={projectName}
                     onChange={e => setProjectName(e.target.value)}

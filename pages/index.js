@@ -7,6 +7,8 @@ import Loading from '../components/elements/Loading'
 import Error from '../components/elements/Error'
 import Navbar from '../components/widgets/Navbar'
 
+import layout from '../styles/layout.module.css'
+
 /*
 Nothing is here yet
 server side generated:
@@ -24,8 +26,9 @@ export default function Home() {
 
   if (user || loading || error) {
     return (
-        <>
-            <Navbar />
+      <>
+        <Navbar />
+        <div className={layout.layout}>
             {loading && <Loading />}
             {error && <Error msg={error.message} />}
             {user && (
@@ -34,7 +37,8 @@ export default function Home() {
                 <button onClick={handleSignOut}>Sign Out</button>
               </>
             )}
-        </>
+        </div>
+      </>
       )
   }
 

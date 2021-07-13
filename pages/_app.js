@@ -3,6 +3,7 @@ import { auth } from '../app/firebaseApp'
 import nookies from 'nookies'
 import '../styles/globals.css'
 
+
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async user => {
@@ -17,7 +18,9 @@ function MyApp({ Component, pageProps }) {
     return () => unsub
   }, [])
 
-  return <Component {...pageProps} />
+  return (
+    <Component {...pageProps} />
+  )
 }
 
 export default MyApp

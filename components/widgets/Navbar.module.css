@@ -2,5 +2,30 @@
 .nav {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
+    align-items: center;
+    gap: 80px;
+    padding: 15px 60px;
+}
+
+.link {
+    text-decoration: underline rgb(190, 190, 190) 3px;
+    color: rgb(99, 99, 99);
+}
+
+.link:hover {
+    text-decoration: underline rgb(58, 58, 58) 4px;
+    color: black;
+    transition: 0.2s ease-in;
+}
+
+.activeLink {
+    text-decoration: underline rgb(58, 58, 58) 4px;
+    font-weight: bolder;
+    transition: 0.2s ease-in;
+}
+
+.avatar {
+    margin: 100px;
+    padding: 100px;
 }
